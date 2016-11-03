@@ -28,4 +28,14 @@ public class CalculatorTest {
     public final void whenEmptyStringIsUsedThenReturnValueIs0() {
         assertThat(0, is(StringCalculator.add("")));
     }
+
+    @Test
+    public final void whenOneNumberIsUsedThenReturnValueIsThatSameNumber() {
+        assertThat(3, is(StringCalculator.add("3")));
+    }
+
+    @Test
+    public final void whenTwoNumbersAreUsedThenReturnValueIsTheirSum() {
+        assertThat(3 + 6, is(StringCalculator.add("3,6")));
+    }
 }
