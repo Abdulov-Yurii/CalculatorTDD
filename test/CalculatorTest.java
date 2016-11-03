@@ -4,6 +4,7 @@ import org.junit.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.notNullValue;
 
 /**
  * Created by employee on 11/3/16.
@@ -54,4 +55,22 @@ public class CalculatorTest {
     public final void whenDelimiterIsSpecifiedThenItIsUsedToSeparateNumbers() {
         assertThat(3 + 6 + 15, equalTo(StringCalculator.add("//;n3;6;15")));
     }
+
+    @Test(expected = RuntimeException.class)
+    public final void whenNegativeNumberIsUsedThenRuntimeExceptionIsThrown() {
+        StringCalculator.add("3,-6,15,18,46,33");
+    }
+
+    @Test
+    public final void whenNegativeNumbersAreUsedThenRuntimeExceptionIsThrown() {
+        RuntimeException exception = null;
+        try {
+            StringCalculator.add("3,-6,15,-18,46,33");
+        } catch (RuntimeException e) {
+            exception = e;
+        }
+        assertThat(exception, notNullValue());
+        assertThat("Negatives not allowed: [-6, -18]", is(exception.getMessage()));
+    }
+
 }

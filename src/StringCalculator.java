@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by employee on 11/3/16.
  */
@@ -10,17 +13,24 @@ public class StringCalculator {
             delimiter = numbers.substring(delimiterIndex, numbers.indexOf("n"));
             numbers = numbers.substring(numbers.indexOf("n") + 1 );
         }
-        return addWithoutDelimiter(numbers, delimiter);
+        return add(numbers, delimiter);
     }
 
-    private static int addWithoutDelimiter(String numbers, String delimiter) {
+    private static int add(String numbers, String delimiter) {
         int resultValue = 0;
-
+        List<Integer> negativeNumbers = new ArrayList<>();
         String[] numbersArray = numbers.split(delimiter);
         for (String number : numbersArray) {
             if (!number.isEmpty()) {
-                resultValue += Integer.parseInt(number);
+                int value = Integer.parseInt(number);
+                if (value >= 0)
+                    resultValue += value;
+                else
+                    negativeNumbers.add(value);
             }
+        }
+        if (negativeNumbers.size() != 0){
+            throw new RuntimeException("Negatives not allowed: " + negativeNumbers.toString());
         }
         return resultValue;
     }
