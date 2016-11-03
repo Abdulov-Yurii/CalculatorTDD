@@ -91,4 +91,9 @@ public class CalculatorTest {
         assertThat(1+2+3, is(StringCalculator.add("//[-][%]\n1-2%3")));
     }
 
+    @Test
+    public void multipleLongDelimiters(){
+        assertThat(1+2+3, is(StringCalculator.add("//[-;-][%]\n1-;-2%3")));
+    }
+
 }
