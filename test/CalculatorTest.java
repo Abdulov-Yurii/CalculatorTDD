@@ -8,10 +8,10 @@ import static org.hamcrest.Matchers.is;
  * Created by employee on 11/3/16.
  */
 public class CalculatorTest {
-    @Test(expected = RuntimeException.class)
-    public final void whenMoreThan2NumbersAreUsedThenExceptionIsThrown() {
-        StringCalculator.add("1,2,3");
-    }
+//    @Test(expected = RuntimeException.class)
+//    public final void whenMoreThan2NumbersAreUsedThenExceptionIsThrown() {
+//        StringCalculator.add("1,2,3");
+//    }
 
     @Test
     public final void when2NumbersAreUsedThenNoExceptionIsThrown() {
@@ -37,5 +37,10 @@ public class CalculatorTest {
     @Test
     public final void whenTwoNumbersAreUsedThenReturnValueIsTheirSum() {
         assertThat(3 + 6, is(StringCalculator.add("3,6")));
+    }
+
+    @Test
+    public final void whenAnyNumberOfNumbersIsUsedThenReturnValuesAreTheirSums() {
+        Assert.assertEquals(3+6+15+18+46+33, StringCalculator.add("3,6,15,18,46,33"));
     }
 }
