@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
 /**
@@ -41,11 +42,16 @@ public class CalculatorTest {
 
     @Test
     public final void whenAnyNumberOfNumbersIsUsedThenReturnValuesAreTheirSums() {
-        Assert.assertEquals(3+6+15+18+46+33, StringCalculator.add("3,6,15,18,46,33"));
+        assertThat(3 + 6 + 15 + 18 + 46 + 33, equalTo(StringCalculator.add("3,6,15,18,46,33")));
     }
 
     @Test
     public final void whenNewLineIsUsedBetweenNumbersThenReturnValuesAreTheirSums() {
-        Assert.assertEquals(3+6+15, StringCalculator.add("3,6n15"));
+        assertThat(3 + 6 + 15, equalTo(StringCalculator.add("3,6n15")));
+    }
+
+    @Test
+    public final void whenDelimiterIsSpecifiedThenItIsUsedToSeparateNumbers() {
+        assertThat(3 + 6 + 15, equalTo(StringCalculator.add("//;n3;6;15")));
     }
 }
