@@ -26,7 +26,6 @@ public class CalculatorTest {
 
     @Test
     public final void whenEmptyStringIsUsedThenReturnValueIs0() {
-        Assert.assertEquals(0, StringCalculator.add(""));
         assertThat(0, is(StringCalculator.add("")));
     }
 }
