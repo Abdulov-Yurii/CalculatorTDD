@@ -10,10 +10,10 @@ public class StringCalculator {
         String delimiter = "[,n]";
         if (numbers.startsWith("//")) {
             int delimiterIndex = numbers.indexOf("//") + 2;
-            delimiter = numbers.substring(delimiterIndex, numbers.indexOf("n"));
-            numbers = numbers.substring(numbers.indexOf("n") + 1 );
+            delimiter = numbers.substring(delimiterIndex, numbers.indexOf("\n"));
+            numbers = numbers.substring(numbers.indexOf("\n") + 1 );
         }
-        return add(numbers, delimiter);
+        return add(numbers, "[" + delimiter + "]");
     }
 
     private static int add(String numbers, String delimiter) {

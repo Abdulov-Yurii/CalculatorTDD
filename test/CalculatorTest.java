@@ -2,9 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by employee on 11/3/16.
@@ -17,8 +15,13 @@ public class CalculatorTest {
 
     @Test
     public final void when2NumbersAreUsedThenNoExceptionIsThrown() {
-        StringCalculator.add("1,2");
-        Assert.assertTrue(true);
+        Exception exception = null;
+        try {
+            StringCalculator.add("1,2");
+        } catch (Exception e) {
+            exception = e;
+        }
+        assertThat(exception, nullValue());
     }
 
     @Test(expected = RuntimeException.class)
@@ -53,7 +56,7 @@ public class CalculatorTest {
 
     @Test
     public final void whenDelimiterIsSpecifiedThenItIsUsedToSeparateNumbers() {
-        assertThat(3 + 6 + 15, equalTo(StringCalculator.add("//;n3;6;15")));
+        assertThat(3 + 6 + 15, equalTo(StringCalculator.add("//;\n3;6;15")));
     }
 
     @Test(expected = RuntimeException.class)
@@ -76,6 +79,16 @@ public class CalculatorTest {
     @Test
     public void ignoredMoreThousandValues(){
         assertThat(3 + 1000 + 1, is(StringCalculator.add("3, 1000 , 156498, 1")));
+    }
+
+    @Test
+    public void anyLengthDelimiter(){
+        assertThat(1+2+3, is(StringCalculator.add("//[—]\n1—2—3")));
+    }
+
+    @Test
+    public void multipleDelimiters(){
+        assertThat(1+2+3, is(StringCalculator.add("//[-][%]\n1-2%3")));
     }
 
 }
