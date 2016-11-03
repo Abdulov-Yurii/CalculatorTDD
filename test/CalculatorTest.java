@@ -70,7 +70,12 @@ public class CalculatorTest {
             exception = e;
         }
         assertThat(exception, notNullValue());
-        assertThat("Negatives not allowed: [-6, -18]", is(exception.getMessage()));
+        assertThat("Negatives not allowed: [-6, -18]", equalTo(exception.getMessage()));
+    }
+
+    @Test
+    public void ignoredMoreThousandValues(){
+        assertThat(3 + 1000 + 1, is(StringCalculator.add("3, 1000 , 156498, 1")));
     }
 
 }

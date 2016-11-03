@@ -22,9 +22,9 @@ public class StringCalculator {
         String[] numbersArray = numbers.split(delimiter);
         for (String number : numbersArray) {
             if (!number.isEmpty()) {
-                int value = Integer.parseInt(number);
+                int value = Integer.parseInt(number.trim());
                 if (value >= 0)
-                    resultValue += value;
+                    resultValue += value > 1000 ? 0 : value;
                 else
                     negativeNumbers.add(value);
             }
